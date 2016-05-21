@@ -1,0 +1,39 @@
+
+section.jumbotron {
+  margin-bottom: 30px;
+  padding: 1px 30px;
+  background-color: #5aadbb;
+  text-align: center;
+  width: 100%;
+
+  color: white;
+
+  h1 {
+    font-size: 3em;
+  }
+
+  .input-field {
+
+    label{
+      color: #FFF;
+      left: 0rem;   
+    }
+
+    input{
+      border-bottom-color: #FFF;
+
+      &:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0px 1000px #5aadbb inset;
+        -webkit-text-fill-color: yellow !important;
+      }
+
+      &:focus {
+        border-bottom-color: #FFF;
+      }
+
+      &:focus + label{
+        color: #EEE;
+      }
+    }
+  }
+}

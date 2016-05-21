@@ -1,0 +1,39 @@
+$tile-size: 65px;
+
+.attempts {
+  margin-top: 15px;
+  margin-bottom: 50px;
+}
+
+.tile {
+  float: left;
+  margin: 3px;
+  width: $tile-size;
+
+  .info {
+    line-height: 25px;
+    font-size: 3em;
+    text-align: center;
+    padding-top: 15px;
+
+    small {
+      font-size: .25em;
+      display: block;
+      color: #999;
+    }
+  }
+
+  .btn {
+    width: $tile-size;
+    height: $tile-size;
+  }
+}
+
+.btn.send {
+  border-radius: 50%;
+
+  i{
+    margin-left: -5px;
+    margin-top: 5px;
+  }
+}
