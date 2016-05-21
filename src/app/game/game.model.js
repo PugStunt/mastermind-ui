@@ -25,7 +25,7 @@
 
       return GameApi.start(name)
         .then(function (data) {
-          _model.key = 's_G4r44rqcJBr_jMTDNOnYEweJNsi4Z-R-ZTWMyR31H755rVrKEytxz_6EtxGY2SXEw'; //data.game_key;
+          _model.key = data.game_key;
 
           _model.guess = emptyGuesses(data.colors.length);
           _model.guessComplete = false;
