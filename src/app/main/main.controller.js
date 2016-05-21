@@ -28,7 +28,7 @@
     function onSendGuessResponse(model) {
       if(model.win){
         var time = moment.duration(model.win.time, 'seconds').format('mm:ss'),
-          message = ['You win with', model.win.num, 'guesses in', time, 'minutes'].join(' ');
+          message = ['You won with', model.win.num, 'guesses in', time, 'minutes'].join(' ');
 
         SweetAlert.swal('Congrats!', message, 'success');
       }

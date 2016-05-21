@@ -25,7 +25,7 @@
 
       return GameApi.start(name)
         .then(function (data) {
-          _model.key = data.game_key;
+          _model.key = 's_G4r44rqcJBr_jMTDNOnYEweJNsi4Z-R-ZTWMyR31H755rVrKEytxz_6EtxGY2SXEw'; //data.game_key;
 
           _model.guess = emptyGuesses(data.colors.length);
           _model.guessComplete = false;
@@ -59,7 +59,7 @@
     function getWinData(data) {
       if(data.solved === "true" || data.solved === true){ // workaround
         return {
-          time: data.time_taken.toFixed(0),
+          time: data.time_taken,
           num: data.num_guesses,
           message: data.further_instructions
         };
