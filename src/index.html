@@ -34,15 +34,22 @@
         >
         <section class="jumbotron animated" layout="column" layout-align="center center">
           <h1>Mastermind!</h1>
-          <div ng-if="main.phase == 'welcome'">
+          <form name="login" ng-if="main.phase == 'welcome'" novalidate>
             <div class="row">
               <div class="input-field">
-                <input id="name" type="text" ng-model="main.name" autofocus="">
+                <input id="name" type="text" ng-model="main.name" autofocus="" required="">
                 <label for="name">Name</label>
               </div>
             </div>
-            <button class="waves-effect waves-light btn orange" ng-click="main.start(main.name)">Start Game!</button>
-          </div>
+            <button
+              class="waves-effect waves-light btn orange"
+              ng-click="main.start(main.name)"
+              ng-disabled="login.$invalid"
+              ng-class="{'accent-2': login.$invalid}"
+              >Start Game!</button>
+
+              <pre>{{login.$invald|json}}</pre>
+          </form>
         </section>
 
         <div class="container" ng-if="main.phase == 'playing'">

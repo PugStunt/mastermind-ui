@@ -29,6 +29,7 @@
 
           _model.guess = emptyGuesses(data.colors.length);
           _model.guessComplete = false;
+          _model.pastResults = [];
           _model.colors = transformColors(data.colors);
 
           return data;
