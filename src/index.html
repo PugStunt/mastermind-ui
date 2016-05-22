@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="mastermindUi" ng-cloak>
+<html ng-app="mastermindUi" ng-cloak="">
   <head>
     <meta charset="utf-8">
     <title>Mastermind!</title>
@@ -47,8 +47,6 @@
               ng-disabled="login.$invalid"
               ng-class="{'accent-2': login.$invalid}"
               >Start Game!</button>
-
-              <pre>{{login.$invald|json}}</pre>
           </form>
         </section>
 
