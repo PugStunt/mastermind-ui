@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -29,9 +29,12 @@
 
       el.addClass('acme-malarkey');
 
-      angular.forEach(scope.extraValues, function(value) {
-        typist.type(value).pause().delete();
-      });
+      console.log(scope.extraValues)
+      angular.forEach(scope.extraValues, forEachExtraValue);
+
+      function forEachExtraValue(value) {
+        typist.type(value).pause()['delete']();
+      }
     }
 
   }

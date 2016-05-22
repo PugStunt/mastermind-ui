@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -19,21 +19,22 @@
     return _model;
 
     function start(name) {
-      if(!angular.isString(name) || name.lenght === 0) {
+      if(!angular.isString(name) || name.lenght === 0)
         return $q.reject();
-      }
 
       return GameApi.start(name)
-        .then(function (data) {
-          _model.key = data.game_key;
+        .then(onGameStart);
+    }
 
-          _model.guess = emptyGuesses(data.colors.length);
-          _model.guessComplete = false;
-          _model.pastResults = [];
-          _model.colors = transformColors(data.colors);
+    function onGameStart(data) {
+      _model.key = data.game_key;
 
-          return data;
-      });
+      _model.guess = emptyGuesses(data.colors.length);
+      _model.guessComplete = false;
+      _model.pastResults = [];
+      _model.colors = transformColors(data.colors);
+
+      return data;
     }
 
     function sendGuess() {
@@ -43,22 +44,25 @@
           .join('');
 
       return GameApi.send(key, guess)
-        .then(function (data) {
-          _model.pastResults = data.past_results.reverse();
-          _model.win = getWinData(data);
-          _model.guess = emptyGuesses(data.colors.length);
-          _model.guessComplete = false;
-          _model.pastResults.forEach(function (pastResult) {
-            var guessAsArray = pastResult.guess.split('');
-            pastResult.guess = transformColors(guessAsArray);
-          });
+        .then(onGuessSent);
+    }
 
-          return _model;
-        });
+    function onGuessSent(data) {
+      _model.pastResults = data.past_results.reverse();
+      _model.win = getWinData(data);
+      _model.guess = emptyGuesses(data.colors.length);
+      _model.guessComplete = false;
+      _model.pastResults.forEach(function (pastResult) {
+        var guessAsArray = pastResult.guess.split('');
+
+        pastResult.guess = transformColors(guessAsArray);
+      });
+
+      return _model;
     }
 
     function getWinData(data) {
-      if(data.solved === "true" || data.solved === true){ // workaround
+      if(data.solved === 'true' || data.solved === true){ // workaround
         return {
           time: data.time_taken,
           num: data.num_guesses,
@@ -75,13 +79,11 @@
 
     function guessNext(color) {
       var index = _model.guess.indexOf(EMPTY_GUESS);
-      if(index === -1) {
-        return;
-      }
+
+      if(index === -1) return;
 
       _model.guess[index] = color;
       _model.guessComplete = _model.guess.indexOf(EMPTY_GUESS) === -1;
-
     }
 
     function resetGuess(index) {
@@ -92,7 +94,7 @@
     function emptyGuesses(size) {
       var guess = [];
 
-      for(var i=0; i<size; i++){
+      for(var index=0; index<size; index++){
         guess.push(EMPTY_GUESS);
       }
 

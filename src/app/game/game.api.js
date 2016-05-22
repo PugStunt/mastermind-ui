@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -38,7 +38,7 @@
         url: api.concat('/guess'),
         data: {
           code: guess,
-          game_key: key
+          'game_key': key
         }
       })
       .then(function (response) {

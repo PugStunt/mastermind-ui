@@ -36,6 +36,8 @@ function listFiles() {
     served: true,
     watched: false
   });
+
+  files.push('node_modules/bardjs/dist/bard.js')
   return files;
 }
 
@@ -55,7 +57,7 @@ module.exports = function(config) {
 
     logLevel: 'WARN',
 
-    frameworks: ['phantomjs-shim', 'jasmine', 'angular-filesort'],
+    frameworks: ['phantomjs-shim', 'jasmine', 'angular-filesort', 'mocha', 'sinon-chai'],
 
     angularFilesort: {
       whitelist: [path.join(conf.paths.src, '/**/!(*.html|*.spec|*.mock).js')]
@@ -63,13 +65,22 @@ module.exports = function(config) {
 
     browsers : ['PhantomJS'],
 
+    // chai config
+    client: {
+      chai: {
+        includeStack: true
+      }
+    },
+
     plugins : [
       'karma-phantomjs-launcher',
       'karma-angular-filesort',
       'karma-phantomjs-shim',
       'karma-coverage',
       'karma-jasmine',
-      'karma-ng-html2js-preprocessor'
+      'karma-ng-html2js-preprocessor',
+      'karma-mocha',
+      'karma-sinon-chai'
     ],
 
     coverageReporter: {

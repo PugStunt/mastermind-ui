@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -8,6 +8,7 @@
   /** @ngInject */
   function MainController(GameModel, SweetAlert, moment) {
     var vm = this;
+
     vm.phase = 'welcome';
     vm.start = start;
     vm.model = GameModel;
@@ -16,9 +17,11 @@
     vm.sendGuess = sendGuess;
 
     function start(name) {
-      GameModel.start(name).then(function () {
-        vm.phase = 'playing';
-      });
+      GameModel.start(name).then(onGameStart);
+    }
+
+    function onGameStart() {
+      vm.phase = 'playing';
     }
 
     function sendGuess() {
@@ -26,9 +29,11 @@
     }
 
     function onSendGuessResponse(model) {
+      var time, message;
+
       if(model.win){
-        var time = moment.duration(model.win.time, 'seconds').format('mm:ss'),
-          message = ['You won with', model.win.num, 'guesses in', time, 'minutes!'].join(' ');
+        time = moment.duration(model.win.time, 'seconds').format('mm:ss');
+        message = ['You won with', model.win.num, 'guesses in', time, 'minutes!'].join(' ');
 
         SweetAlert.swal('Congrats!', message, 'success');
       }

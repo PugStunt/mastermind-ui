@@ -1,39 +1,71 @@
-(function() {
-  'use strict';
+/* eslint  no-undef: 0*/
+/* eslint  no-unused-expressions: 0*/
+/* eslint  dot-notation: 0*/
+/* eslint  vars-on-top: 0*/
+describe('MainController', function (){
 
-  describe('controllers', function(){
-    var vm;
-    var $timeout;
-    var toastr;
+  beforeEach(module('mastermindUi'));
 
-    beforeEach(module('mastermindUi'));
-    beforeEach(inject(function(_$controller_, _$timeout_, _webDevTec_, _toastr_) {
-      spyOn(_webDevTec_, 'getTec').and.returnValue([{}, {}, {}, {}, {}]);
-      spyOn(_toastr_, 'info').and.callThrough();
+  it('smoke', function () {
+    bard.inject(this, '$controller');
 
-      vm = _$controller_('MainController');
-      $timeout = _$timeout_;
-      toastr = _toastr_;
-    }));
+    var ctrl = $controller('MainController');
 
-    it('should have a timestamp creation date', function() {
-      expect(vm.creationDate).toEqual(jasmine.any(Number));
-    });
-
-    it('should define animate class after delaying timeout ', function() {
-      $timeout.flush();
-      expect(vm.classAnimation).toEqual('rubberBand');
-    });
-
-    it('should show a Toastr info and stop animation when invoke showToastr()', function() {
-      vm.showToastr();
-      expect(toastr.info).toHaveBeenCalled();
-      expect(vm.classAnimation).toEqual('');
-    });
-
-    it('should define more than 5 awesome things', function() {
-      expect(angular.isArray(vm.awesomeThings)).toBeTruthy();
-      expect(vm.awesomeThings.length === 5).toBeTruthy();
-    });
+    ctrl.phase.should.be.equals('welcome');
   });
-})();
+
+  it('should start a game', function () {
+    bard.inject(this, '$q', '$rootScope', '$controller', 'GameModel');
+
+    var ctrl = $controller('MainController');
+
+    sinon.stub(GameModel, 'start', function () {
+      return $q.when();
+    });
+
+    ctrl.start('FOO');
+    $rootScope.$apply();
+
+    ctrl.phase.should.be.equals('playing');
+  });
+
+  it('should send a guess', function () {
+    bard.inject(this, '$q', '$rootScope', '$controller', 'GameModel', 'SweetAlert');
+
+    var ctrl = $controller('MainController'),
+      stub = sinon.stub(SweetAlert, 'swal');
+
+    sinon.stub(GameModel, 'sendGuess', function () {
+      return $q.when({win: false});
+    });
+
+    ctrl.sendGuess();
+    $rootScope.$apply();
+
+    stub.called.should.be.false;
+  });
+
+  it('should send a guess - win case', function () {
+    bard.inject(this, '$q', '$rootScope', '$controller', 'GameModel', 'SweetAlert');
+
+    var ctrl = $controller('MainController'),
+      stub = sinon.stub(SweetAlert, 'swal');
+
+    sinon.stub(GameModel, 'sendGuess', function () {
+      return $q.when({
+        win: {
+          time: 123,
+          num: 12
+        }
+      });
+    });
+
+    ctrl.sendGuess();
+    $rootScope.$apply();
+
+    stub.called.should.be.true;
+    stub.lastCall.args[1]
+      .should.be.equals('You won with 12 guesses in 02:03 minutes!');
+  });
+
+});
