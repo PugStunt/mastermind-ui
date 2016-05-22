@@ -72,10 +72,20 @@ html {
   bottom: 0;
   width: 100%;
   padding: 3px;
-  z-index: 2;
+  z-index: 5;
 
   i.material-icons{
     font-size: 8pt;
+  }
+}
+
+@supports (-webkit-text-size-adjust:none) and (not (-ms-accelerator:true))
+and (not (-moz-appearance:none))  {
+  .fixed-action-btn i {
+    padding-left: 8px;
+  }
+  .fixed-action-btn .large {
+    padding-left: 16.5px;
   }
 }
 

@@ -29,7 +29,6 @@
 
       el.addClass('acme-malarkey');
 
-      console.log(scope.extraValues)
       angular.forEach(scope.extraValues, forEachExtraValue);
 
       function forEachExtraValue(value) {

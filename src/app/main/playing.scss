@@ -1,8 +1,21 @@
 $tile-size: 65px;
+$tile-size-mobile: 40px;
 
 .attempts {
   margin-top: 15px;
   margin-bottom: 50px;
+
+  @media screen and (max-width: 480px) {
+    margin-top: 5px;
+  }
+}
+
+
+@media screen and (max-width: 480px) {
+  .guess .btn.white {
+    border-bottom: 1px solid #CCC;
+    border-left: 1px solid #CCC;
+  }
 }
 
 .tile {
@@ -10,30 +23,75 @@ $tile-size: 65px;
   margin: 3px;
   width: $tile-size;
 
+  @media screen and (max-width: 480px) {
+    width: $tile-size-mobile;
+    overflow: hidden;
+    margin: 1px;
+  }
+
+  z-index: 2;
+
+  .last.info{
+    z-index: 3;
+    background-color: red;
+  }
+
   .info {
     line-height: 25px;
     font-size: 3em;
     text-align: center;
     padding-top: 15px;
 
+    @media screen and (max-width: 480px) {
+      font-size: 2em;
+      line-height: 20px;
+    }
+
+
     small {
       font-size: .25em;
       display: block;
       color: #999;
+
+      @media screen and (max-width: 480px) {
+        font-size: .35em;
+        color: #000;
+      }
     }
   }
 
   .btn {
     width: $tile-size;
     height: $tile-size;
+    padding: 0;
+    margin: 0;
+
+    @media screen and (max-width: 480px) {
+      width: $tile-size-mobile;
+      height: $tile-size-mobile - 10px;
+    }
   }
 }
 
+
 .btn.send {
-  border-radius: 50%;
 
   i{
-    margin-left: -5px;
-    margin-top: 5px;
+    margin-left: -6px;
+    margin-top: -3px;
+  }
+}
+
+
+@media screen and (min-width: 480px) {
+  .btn.send {
+    border-radius: 50%;
+    padding: 0;
+    margin: 0;
+
+    i{
+      margin-left: 1px;
+      margin-top: 5px;
+    }
   }
 }
