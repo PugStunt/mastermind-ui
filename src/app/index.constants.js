@@ -16,6 +16,11 @@
       P: 'purple',
       C: 'cyan',
       M: 'pink'
+    })
+    .config(function ($provide) {
+      var api = window.api;
+
+      $provide.constant('api', api);
     });
 
 })();

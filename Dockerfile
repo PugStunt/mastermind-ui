@@ -8,7 +8,7 @@ COPY . /app
 
 ENV API_HOST 'http://api.com/'
 
-RUN echo "angular.module('mastermindUi').constant('api', '$API_HOST');" > /app/src/build.constant.js
+RUN sed -i "s#/api#$API_HOST#" /app/src/app/index.constants.js
 
 RUN npm install  && \
   npm install -g gulp bower http-server && \
