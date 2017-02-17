@@ -1,15 +1,20 @@
-FROM node:latest
-MAINTAINER rochapaulo
+FROM node:boron
+MAINTAINER PugStunt
 
-RUN mkdir -p /usr/src/app
+RUN mkdir -p /app
 
-WORKDIR /usr/src/app
-COPY . /usr/src/app
-COPY package.json /usr/src/app/package.json
+WORKDIR /app
+COPY . /app
 
-RUN npm install -y
-RUN npm install -g -y gulp
-RUN npm install -g -y bower
+ENV API_HOST 'http://api.com/'
 
-EXPOSE 3000 3001
-CMD ["gulp", "serve"]
+RUN echo "angular.module('mastermindUi').constant('api', '$API_HOST');" > /app/src/build.constant.js
+
+RUN npm install  && \
+  npm install -g gulp bower http-server && \
+  bower --allow-root i && \
+  gulp build
+
+EXPOSE 8080
+
+CMD hs /app/dist
