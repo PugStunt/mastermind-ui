@@ -1,20 +1,7 @@
-FROM node:boron
-MAINTAINER PugStunt
+FROM nginx
 
-RUN mkdir -p /app
+RUN rm /etc/nginx/conf.d/default.conf
 
-WORKDIR /app
-COPY . /app
+COPY dist /usr/share/nginx/html
 
-ENV API_HOST 'http://api.com/'
-
-RUN sed -i "s#/api#$API_HOST#" /app/src/app/index.constants.js
-
-RUN npm install  && \
-  npm install -g gulp bower http-server && \
-  bower --allow-root i && \
-  gulp build
-
-EXPOSE 8080
-
-CMD hs /app/dist
+COPY nginx.conf /etc/nginx/conf.d/default.conf
