@@ -6,6 +6,7 @@
   },
   "devDependencies": {
     "bardjs": "^0.1.8",
+    "angular-touch": "latest",
     "browser-sync": "~2.9.11",
     "browser-sync-spa": "~1.0.3",
     "chai": "^3.5.0",
