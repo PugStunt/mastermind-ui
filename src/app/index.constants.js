@@ -7,8 +7,7 @@
     .module('mastermindUi')
     .constant('malarkey', malarkey)
     .constant('moment', moment)
-    // .constant('api', 'https://az-mastermind.herokuapp.com')
-    .constant('api', 'https://mastermind-pugstunt.herokuapp.com/mastermind/v1')
+    .constant('api', '/api')
     .constant('colors', {
       R: 'red',
       B: 'blue',
