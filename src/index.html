@@ -5,6 +5,9 @@
     <title>Mastermind!</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, user-scalable=no">
+
+    <meta name="google-signin-callback" content="signinCallback" />
+
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
@@ -35,6 +38,15 @@
         <section class="jumbotron animated" layout="column" layout-align="center center">
           <h1>Mastermind!</h1>
           <form name="login" ng-if="main.phase == 'welcome'" novalidate>
+
+            <button
+              class="waves-effect waves-light btn orange"
+              ng-click="main.startWithGoogle()"
+            >
+              Login using Google
+            </button>
+
+            <hr />
             <div class="row">
               <div class="input-field">
                 <input id="name" type="text" ng-model="main.name" autofocus="" required="">
@@ -131,6 +143,9 @@
      </footer>
 
     </div>
+
+    <script src="https://apis.google.com/js/client.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->
     <!-- run `gulp inject` to automatically populate bower script dependencies -->

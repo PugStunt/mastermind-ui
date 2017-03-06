@@ -11,6 +11,7 @@
 
     vm.phase = 'welcome';
     vm.start = start;
+    vm.startWithGoogle = startWithGoogle;
     vm.model = GameModel;
     vm.resetGuess = vm.model.resetGuess;
     vm.guessNext = vm.model.guessNext;
@@ -18,6 +19,10 @@
 
     function start(name) {
       GameModel.start(name).then(onGameStart);
+    }
+
+    function startWithGoogle() {
+      GameModel.startWithGoogle().then(onGameStart);
     }
 
     function onGameStart() {
